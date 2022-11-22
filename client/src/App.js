@@ -5,7 +5,7 @@ import Routes from "./routes";
 
 function App() {
   return (
-    <Box maxW="1200px" m="auto" p='auto'>
+    <Box maxW="1200px" h="100vh" m="auto" p='auto'>
       <Routes />
     </Box>
   );

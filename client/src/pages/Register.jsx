@@ -63,14 +63,6 @@ const Register = () => {
                     />
                     <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>
-                  <Field
-                    as={Checkbox}
-                    id="rememberMe"
-                    name="rememberMe"
-                    colorScheme="purple"
-                  >
-                    Remember me?
-                  </Field>
                   <Button type="submit" colorScheme="purple" width="full">
                     Регистрация
                   </Button>

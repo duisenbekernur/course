@@ -1,14 +1,18 @@
-import React from 'react'
-import Header from '../components/Header'
-import Sidebar from '../components/Sidebar'
+import React from "react";
+import ChatMessages from "../components/ChatMessages";
+import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
 
 const Chat = () => {
   return (
-    <div className='chat'>
+    <div className="chat">
       <Header />
-      <Sidebar />
+      <div className="chat-content">
+        <Sidebar />
+        <ChatMessages />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Chat
+export default Chat;

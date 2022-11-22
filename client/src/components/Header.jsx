@@ -31,7 +31,7 @@ const Header = () => {
           <div className="settings"><img src={require("../assets/dot.png")} alt="" /></div>
         </div>
       </div>
-      <hr />
+      <hr className="hr"/>
     </>
   );
 };
