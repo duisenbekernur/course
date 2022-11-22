@@ -1,8 +1,13 @@
 import React from 'react'
+import Header from '../components/Header'
+import Sidebar from '../components/Sidebar'
 
 const Chat = () => {
   return (
-    <div>Chat</div>
+    <div className='chat'>
+      <Header />
+      <Sidebar />
+    </div>
   )
 }
 
