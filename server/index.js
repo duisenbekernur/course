@@ -1,6 +1,7 @@
 const express = require("express");
 const { login, register } = require("./controllers/UserController");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 mongoose
   .connect(
@@ -16,7 +17,8 @@ mongoose
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded( {extended: true}));
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.post("/auth/login", login);
 app.post("/auth/register", register);

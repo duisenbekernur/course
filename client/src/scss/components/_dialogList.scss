@@ -3,6 +3,12 @@
   align-items: center;
   gap: 5px;
   height: 65px;
+  padding: 5px;
+  transition: .2s all;
+
+  &:hover {
+    background-color: rgb(231, 231, 231);
+  }
 
   img {
     width: 40px;

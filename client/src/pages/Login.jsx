@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { Formik, Field } from "formik";
 import {
   Box,
@@ -14,16 +16,28 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-const submit = async (values) => {
-  console.log(JSON.stringify(values, null, 2));
-  const res = await axios.post(
-    "http://localhost:3001/auth/login/",
-    JSON.stringify(values, null, 2)
-  );
-  console.log(res);
-};
-
 const Login = () => {
+
+  if (localStorage.getItem("isSigned") === "true") {
+    window.location.pathname = "/chat";
+  }
+
+  const submit = async (values) => {
+    const user = { email: values.email, password: values.password };
+    const res = await axios.post("http://localhost:3001/auth/login", user);
+    if (res.data.message === "User is not found!") {
+      toast.warn("User is not found!", {
+        position: "top-right",
+        autoClose: 5000,
+      });
+    } else {
+      window.location.pathname = "/chat";
+      if (values.rememberMe) {
+        localStorage.setItem("isSigned", "true");
+      }
+    }
+  };
+
   return (
     <div className="auth">
       <h1>Войти</h1>
@@ -33,8 +47,8 @@ const Login = () => {
           <Formik
             initialValues={{
               email: "",
-              name: "",
               password: "",
+              rememberMe: false,
             }}
             onSubmit={submit}
           >
@@ -66,6 +80,16 @@ const Login = () => {
                     />
                     <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>
+
+                  <Field
+                    as={Checkbox}
+                    id="rememberMe"
+                    name="rememberMe"
+                    colorScheme="purple"
+                  >
+                    Remember me?
+                  </Field>
+
                   <Button type="submit" colorScheme="purple" width="full">
                     Войти
                   </Button>
@@ -83,6 +107,7 @@ const Login = () => {
           </Formik>
         </Box>
       </Flex>
+      <ToastContainer />
     </div>
   );
 };

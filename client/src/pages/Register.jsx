@@ -16,11 +16,11 @@ import {
 
 const Register = () => {
   const submit = async (values) => {
-    console.log(JSON.stringify(values, null, 2));
     const res = await axios.post(
       "http://localhost:3001/auth/register",
-      JSON.stringify(values, null, 2)
+      JSON.parse(JSON.stringify(values, null, 2))
     );
+    console.log(res.data);
   };
 
   return (

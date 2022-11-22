@@ -2,6 +2,11 @@ import React from "react";
 import { Icon, createIcon } from "@chakra-ui/react";
 
 const Header = () => {
+  const logout = () => {
+    localStorage.setItem("isSigned", false);
+    window.location.pathname = "/login";
+  };
+
   return (
     <>
       <div className="header">
@@ -28,10 +33,13 @@ const Header = () => {
               <p>online</p>
             </div>
           </div>
-          <div className="settings"><img src={require("../assets/dot.png")} alt="" /></div>
+          <div className="settings">
+            <img src={require("../assets/dot.png")} alt="" />
+          </div>
         </div>
+        <button onClick={logout}>Выйти</button>
       </div>
-      <hr className="hr"/>
+      <hr className="hr" />
     </>
   );
 };
