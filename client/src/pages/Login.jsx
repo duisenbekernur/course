@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { Formik, Field } from "formik";
 import {
@@ -13,6 +14,15 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
+const submit = async (values) => {
+  console.log(JSON.stringify(values, null, 2));
+  const res = await axios.post(
+    "http://localhost:3001/auth/login/",
+    JSON.stringify(values, null, 2)
+  );
+  console.log(res);
+};
+
 const Login = () => {
   return (
     <div className="auth">
@@ -25,11 +35,8 @@ const Login = () => {
               email: "",
               name: "",
               password: "",
-              rememberMe: false,
             }}
-            onSubmit={(values) => {
-              alert(JSON.stringify(values, null, 2));
-            }}
+            onSubmit={submit}
           >
             {({ handleSubmit, errors, touched }) => (
               <form onSubmit={handleSubmit}>
@@ -59,14 +66,6 @@ const Login = () => {
                     />
                     <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>
-                  <Field
-                    as={Checkbox}
-                    id="rememberMe"
-                    name="rememberMe"
-                    colorScheme="purple"
-                  >
-                    Remember me?
-                  </Field>
                   <Button type="submit" colorScheme="purple" width="full">
                     Войти
                   </Button>

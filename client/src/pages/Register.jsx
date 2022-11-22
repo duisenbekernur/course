@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { Formik, Field } from "formik";
 import {
@@ -14,6 +15,14 @@ import {
 } from "@chakra-ui/react";
 
 const Register = () => {
+  const submit = async (values) => {
+    console.log(JSON.stringify(values, null, 2));
+    const res = await axios.post(
+      "http://localhost:3001/auth/register",
+      JSON.stringify(values, null, 2)
+    );
+  };
+
   return (
     <div className="auth">
       <h1>Регистрация</h1>
@@ -25,11 +34,8 @@ const Register = () => {
               email: "",
               name: "",
               password: "",
-              rememberMe: false,
             }}
-            onSubmit={(values) => {
-              alert(JSON.stringify(values, null, 2));
-            }}
+            onSubmit={submit}
           >
             {({ handleSubmit, errors, touched }) => (
               <form onSubmit={handleSubmit}>
